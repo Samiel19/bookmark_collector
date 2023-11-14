@@ -15,6 +15,32 @@ class Bookmark(models.Model):
         max_length=Limits.URL_LEN.value,
         help_text="Ссылка",
     )
+    title = models.CharField(
+        "Название",
+        max_length=Limits.USER_MODEL_MAX_LEN.value,
+        blank=True,
+        help_text="Название закладки",
+        editable=False,
+    )
+    type = models.CharField(
+        "Тип",
+        max_length=Limits.USER_MODEL_MAX_LEN.value,
+        blank=True,
+        help_text="Тип закладки",
+        editable=False,
+    )
+    description = models.TextField(
+        "Описание",
+        blank=True,
+        help_text="Описание закладки",
+        editable=False,
+    )
+    image = models.URLField(
+        "Изображение",
+        max_length=Limits.URL_LEN.value,
+        blank=True,
+        editable=False,
+    )
     created_at = models.DateTimeField(
         "Дата публикации",
         auto_now_add=True,
@@ -28,24 +54,27 @@ class Bookmark(models.Model):
         ordering = ("created_at",)
 
     @property
-    def title(self):
-        title = f.soup_maker(self.link, "title")
-        return title
+    def get_title(self):
+        return f.soup_maker(self.link, "title")
 
     @property
-    def type(self):
-        type = f.soup_maker(self.link, "type")
-        return type
+    def get_type(self):
+        return f.soup_maker(self.link, "type")
 
     @property
-    def description(self):
-        description = f.soup_maker(self.link, "description")
-        return description
+    def get_description(self):
+        return f.soup_maker(self.link, "description")
 
     @property
-    def image(self):
-        image = f.soup_maker(self.link, "image")
-        return image
+    def get_image(self):
+        return f.soup_maker(self.link, "image")
+
+    def save(self, *args, **kwarg):
+        self.title = self.get_title
+        self.type = self.get_type
+        self.description = self.get_description
+        self.image = self.get_image
+        super(Bookmark, self).save(*args, **kwarg)
 
     def __str__(self):
         return f"Закладка {self.link}"

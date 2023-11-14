@@ -212,6 +212,34 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-computedfields"
+version = "0.2.4"
+description = "autoupdated database fields for model methods"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-computedfields-0.2.4.tar.gz", hash = "sha256:546a99afc7d2e9df3b1d29bdc1eaa4a6b003a75ad162f62e52dd89319c595692"},
+]
+
+[package.dependencies]
+Django = ">=2.2,<5.0"
+django-fast-update = "*"
+typing_extensions = ">=4.1"
+
+[[package]]
+name = "django-fast-update"
+version = "0.2.3"
+description = "Faster db updates for Django using UPDATE FROM VALUES sql variants."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-fast-update-0.2.3.tar.gz", hash = "sha256:76ad711a1dc193e20233458d584e51ad6d354663b8952ada768eec1d997abc3c"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -271,6 +299,22 @@ files = [
 mccabe = ">=0.7.0,<0.8.0"
 pycodestyle = ">=2.11.0,<2.12.0"
 pyflakes = ">=3.1.0,<3.2.0"
+
+[[package]]
+name = "graphviz"
+version = "0.20.1"
+description = "Simple Python interface for Graphviz"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "graphviz-0.20.1-py3-none-any.whl", hash = "sha256:587c58a223b51611c0cf461132da386edd896a029524ca61a1462b880bf97977"},
+    {file = "graphviz-0.20.1.zip", hash = "sha256:8c58f14adaa3b947daf26c19bc1e98c4e0702cdc31cf99153e6f06904d492bf8"},
+]
+
+[package.extras]
+dev = ["flake8", "pep8-naming", "tox (>=3)", "twine", "wheel"]
+docs = ["sphinx (>=5)", "sphinx-autodoc-typehints", "sphinx-rtd-theme"]
+test = ["coverage", "mock (>=4)", "pytest (>=7)", "pytest-cov", "pytest-mock (>=3)"]
 
 [[package]]
 name = "gunicorn"
@@ -977,4 +1021,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "128dca74ce25fd61fd15302ec16f67323cf0b6e907a6e1f0ca0d6bdcb08a277f"
+content-hash = "236807c94791458d5fa1477b535529a7a1eb51bb077215ddc9995d3121459755"
