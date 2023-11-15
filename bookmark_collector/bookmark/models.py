@@ -9,9 +9,14 @@ User = get_user_model()
 class Bookmark(models.Model):
     """Model describing bookmarks"""
 
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="Автор закладки",
+        db_index=True,
+    )
     link = models.URLField(
         "Ссылка",
-        unique=True,
         max_length=Limits.URL_LEN.value,
         help_text="Ссылка",
     )
@@ -49,6 +54,12 @@ class Bookmark(models.Model):
     updated = models.DateTimeField("updated", auto_now=True)
 
     class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["author", "link"],
+                name="unique_link",
+            ),
+        ]
         verbose_name = "Ссылка"
         verbose_name_plural = "Ссылки"
         ordering = ("created_at",)
@@ -113,6 +124,12 @@ class Collection(models.Model):
     )
 
     class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["author", "name"],
+                name="unique_collection",
+            ),
+        ]
         default_related_name = "collection"
         verbose_name = "Коллекция"
         verbose_name_plural = "Коллекции"
