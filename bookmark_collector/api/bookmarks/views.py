@@ -6,6 +6,12 @@ from .serializers import BookmarkSerializer, CollectionSerializer
 
 
 class BookmarkViewSet(viewsets.ModelViewSet):
+    """
+    Return user's bookmarks for DB.
+    Creating new bookmark. Bookmark must be unique for user.
+
+    """
+
     serializer_class = BookmarkSerializer
     permission_classes = (IsAuthorOrReadOnlyPermission,)
 
@@ -17,6 +23,13 @@ class BookmarkViewSet(viewsets.ModelViewSet):
 
 
 class CollectionViewSet(viewsets.ModelViewSet):
+    """
+    Return user's collections for DB.
+    Creating new collection. Collection's name must be unique for user.
+    User can add only this user's bookmarks
+
+    """
+
     serializer_class = CollectionSerializer
     permission_classes = (IsAuthorOrReadOnlyPermission,)
 
