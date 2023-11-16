@@ -2,12 +2,11 @@ from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
 
+from .text import TextConst
+
 
 def get_page(URL):
-    headers = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
-    }
-    req = Request(URL, headers=headers)
+    req = Request(URL, headers=TextConst.HEADERS)
     con = urlopen(req)
     soup = BeautifulSoup(
         con, "html.parser", from_encoding=con.info().get_param("charset")
@@ -20,5 +19,13 @@ def soup_maker(URL, field):
     if soup.findAll("meta", property=f"og:{field}"):
         field = soup.find("meta", property=f"og:{field}")["content"]
     else:
-        field = f"no_{field}"
+        if field == "title" and soup.title:
+            field = soup.find("title").text
+        elif (
+            field == "description"
+            and soup.find(attrs={"name": "description"})["content"]
+        ):
+            field = soup.find(attrs={"name": "description"})["content"]
+        else:
+            field = f"no_{field}"
     return field

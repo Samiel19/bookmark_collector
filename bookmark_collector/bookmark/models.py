@@ -100,7 +100,7 @@ class Collection(models.Model):
         verbose_name="Владелец коллекции",
         db_index=True,
     )
-    link = models.ManyToManyField(
+    links = models.ManyToManyField(
         Bookmark,
         verbose_name="Закладка",
         blank=True,
@@ -113,7 +113,6 @@ class Collection(models.Model):
     )
     name = models.CharField(
         "Имя коллекции",
-        unique=True,
         max_length=Limits.USER_MODEL_MAX_LEN.value,
         help_text="Название коллекции закладок",
     )

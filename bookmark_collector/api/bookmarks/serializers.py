@@ -1,6 +1,6 @@
 from bookmark.models import Bookmark, Collection
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField
+from rest_framework.relations import PrimaryKeyRelatedField, SlugRelatedField
 
 
 class BookmarkSerializer(serializers.ModelSerializer):
@@ -12,14 +12,16 @@ class BookmarkSerializer(serializers.ModelSerializer):
 
 
 class CollectionSerializer(serializers.ModelSerializer):
+    links = PrimaryKeyRelatedField(queryset=Bookmark.objects.all(), many=True)
     author = SlugRelatedField(slug_field="email", read_only=True)
-    # link = SlugRelatedField(slug_field='', read_only=True)
 
     class Meta:
         fields = "__all__"
         model = Collection
 
-    """
-        if self.context['request'].user == self.link.author:
-            return link
-        raise serializers.ValidationError("Как это к вам попало! ;)")"""
+    def validate_links(self, links):
+        for link in links:
+            print(link.author)
+            if self.context["request"].user != link.author:
+                raise serializers.ValidationError("Как это к вам попало! ;)")
+        return links

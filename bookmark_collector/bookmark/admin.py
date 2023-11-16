@@ -6,8 +6,8 @@ from .models import Bookmark, Collection
 @admin.register(Bookmark)
 class BookmarkAdmin(admin.ModelAdmin):
     list_display = (
-        "author",
         "id",
+        "author",
         "link",
         "created_at",
         "title",
@@ -30,8 +30,8 @@ class BookmarkAdmin(admin.ModelAdmin):
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = (
-        "author",
         "id",
+        "author",
         "name",
         "created_at",
     )
