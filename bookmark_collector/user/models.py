@@ -14,9 +14,9 @@ class BookmarkUser(AbstractUser):
     REQUIRED_FIELDS = ["username"]
 
     class Meta:
-        verbose_name = "Пользователь"
-        verbose_name_plural = "Пользователи"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
         ordering = ("-date_joined",)
 
     def __str__(self):
-        return f"Пользователь {self.email}"
+        return f"User {self.email}"

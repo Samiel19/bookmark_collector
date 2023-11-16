@@ -1,4 +1,4 @@
-import core.funks as f
+import core.funcs as f
 from core.enums import Limits
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -12,42 +12,42 @@ class Bookmark(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name="Автор закладки",
+        verbose_name="Bookmark author",
         db_index=True,
     )
     link = models.URLField(
-        "Ссылка",
+        "URL",
         max_length=Limits.URL_LEN.value,
-        help_text="Ссылка",
+        help_text="Bookmark URL",
     )
     title = models.CharField(
-        "Название",
+        "Name",
         max_length=Limits.USER_MODEL_MAX_LEN.value,
         blank=True,
-        help_text="Название закладки",
+        help_text="Bookmark",
         editable=False,
     )
     type = models.CharField(
-        "Тип",
+        "Type",
         max_length=Limits.USER_MODEL_MAX_LEN.value,
         blank=True,
-        help_text="Тип закладки",
+        help_text="Bookmark type",
         editable=False,
     )
     description = models.TextField(
-        "Описание",
+        "Description",
         blank=True,
-        help_text="Описание закладки",
+        help_text="Bookmark description",
         editable=False,
     )
     image = models.URLField(
-        "Изображение",
+        "Image",
         max_length=Limits.URL_LEN.value,
         blank=True,
         editable=False,
     )
     created_at = models.DateTimeField(
-        "Дата публикации",
+        "Publication date",
         auto_now_add=True,
         editable=False,
     )
@@ -60,8 +60,8 @@ class Bookmark(models.Model):
                 name="unique_link",
             ),
         ]
-        verbose_name = "Ссылка"
-        verbose_name_plural = "Ссылки"
+        verbose_name = "Bookmark"
+        verbose_name_plural = "Bookmarks"
         ordering = ("created_at",)
 
     @property
@@ -88,7 +88,7 @@ class Bookmark(models.Model):
         super(Bookmark, self).save(*args, **kwarg)
 
     def __str__(self):
-        return f"Закладка {self.link}"
+        return f"Bookmark {self.link}"
 
 
 class Collection(models.Model):
@@ -97,29 +97,29 @@ class Collection(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name="Владелец коллекции",
+        verbose_name="Collection owner",
         db_index=True,
     )
     links = models.ManyToManyField(
         Bookmark,
-        verbose_name="Закладка",
+        verbose_name="Bookmark",
         blank=True,
     )
     updated = models.DateTimeField("updated", auto_now=True)
     created_at = models.DateTimeField(
-        "Дата публикации",
+        "Publication date",
         auto_now_add=True,
         editable=False,
     )
     name = models.CharField(
-        "Имя коллекции",
+        "Collection name",
         max_length=Limits.USER_MODEL_MAX_LEN.value,
-        help_text="Название коллекции закладок",
+        help_text="Bookmarks collection name",
     )
     description = models.CharField(
-        "Описание коллекции",
+        "Collection description",
         max_length=Limits.TEXT_MAX_LEN.value,
-        help_text="Описание коллекции закладок",
+        help_text="Bookmarks collection description",
     )
 
     class Meta:
@@ -130,9 +130,9 @@ class Collection(models.Model):
             ),
         ]
         default_related_name = "collection"
-        verbose_name = "Коллекция"
-        verbose_name_plural = "Коллекции"
+        verbose_name = "Collection"
+        verbose_name_plural = "Collections"
         ordering = ("-created_at",)
 
     def __str__(self):
-        return f"Коллекция закладок {self.name} пользователя {self.author}"
+        return f"Bookmarks collection {self.name} of user {self.author}"
