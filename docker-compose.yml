@@ -1,0 +1,24 @@
+version: '1'
+
+volumes:
+  pg_data:
+  static_volume:
+
+services:
+  db:
+    image: postgres:13.10
+    env_file: bookmark_collector/.env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  bookmark_collector:
+    image: samiel19/bookmark_collector
+    env_file: bookmark_collector/.env
+    volumes:
+      - static_volume:/bookmark_collector_static
+  gateway:
+    image: samiel19/bookmark_collector_gateway
+    env_file: bookmark_collector/.env
+    volumes:
+      - static_volume:/staticfiles/
+    ports:
+      - 8000:80
