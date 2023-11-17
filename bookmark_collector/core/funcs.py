@@ -21,9 +21,8 @@ def soup_maker(URL, field):
     else:
         if field == "title" and soup.title:
             field = soup.find("title").text
-        elif (
-            field == "description"
-            and soup.find(attrs={"name": "description"})["content"]
+        elif field == "description" and soup.find(
+            attrs={"name": "description"}
         ):
             field = soup.find(attrs={"name": "description"})["content"]
         else:

@@ -1,8 +1,8 @@
 FROM python:3.10-slim
 WORKDIR /app
-RUN pip3 install poetry
+RUN pip install poetry
 COPY pyproject.toml poetry.lock /app/
-RUN poetry install
-RUN poetry shell
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-interaction
 COPY . .
-CMD ["poetry", "run", "gunicorn", "bookmark_collection.wsgi:application", "--bind", "0:8000"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "bookmark_collector.wsgi"]

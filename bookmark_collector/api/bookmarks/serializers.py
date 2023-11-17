@@ -1,4 +1,8 @@
+from urllib import error
+from urllib.request import Request, urlopen
+
 from bookmark.models import Bookmark, Collection
+from core.text import TextConst
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from rest_framework.relations import PrimaryKeyRelatedField, SlugRelatedField
@@ -18,6 +22,11 @@ class BookmarkSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         link = self.initial_data.get("link")
+        req = Request(link, headers=TextConst.HEADERS)
+        try:
+            urlopen(req)
+        except error.URLError as e:
+            raise ValidationError(f"No bookmark, because of {e}")
         if link in Bookmark.objects.filter(
             author=self.context["request"].user
         ).values_list("link", flat=True):
