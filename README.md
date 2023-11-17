@@ -4,6 +4,7 @@
 ## API (server part) for bookmark storage
 
 This service is designed for storing bookmarks and creating collections of them. Link data is taken from open graph markup or meta description.
+
 ![изображение](https://github.com/Samiel19/bookmark_collector/assets/116729352/3b9f25db-eaaf-48dd-bf59-efd80e3a937e)
 
 [github](https://github.com/Samiel19)
