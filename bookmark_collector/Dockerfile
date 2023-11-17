@@ -3,5 +3,6 @@ WORKDIR /app
 RUN pip3 install poetry
 COPY pyproject.toml poetry.lock /app/
 RUN poetry install
+RUN poetry shell
 COPY . .
-CMD ["poetry", "run", "gunicorn", "creating_and_editing_a_resume.wsgi:application", "--bind", "0:8000"]
+CMD ["poetry", "run", "gunicorn", "bookmark_collection.wsgi:application", "--bind", "0:8000"]

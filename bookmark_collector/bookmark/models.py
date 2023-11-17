@@ -58,6 +58,7 @@ class Bookmark(models.Model):
             models.UniqueConstraint(
                 fields=["author", "link"],
                 name="unique_link",
+                violation_error_message=("You have this link already!"),
             ),
         ]
         verbose_name = "Bookmark"
@@ -127,6 +128,7 @@ class Collection(models.Model):
             models.UniqueConstraint(
                 fields=["author", "name"],
                 name="unique_collection",
+                violation_error_message=("You have this collection already!"),
             ),
         ]
         default_related_name = "collection"

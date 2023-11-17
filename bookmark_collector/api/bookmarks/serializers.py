@@ -1,4 +1,5 @@
 from bookmark.models import Bookmark, Collection
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from rest_framework.relations import PrimaryKeyRelatedField, SlugRelatedField
 
@@ -14,6 +15,14 @@ class BookmarkSerializer(serializers.ModelSerializer):
     class Meta:
         fields = "__all__"
         model = Bookmark
+
+    def validate(self, data):
+        link = self.initial_data.get("link")
+        if link in Bookmark.objects.filter(
+            author=self.context["request"].user
+        ).values_list("link", flat=True):
+            raise ValidationError("You have this bookmark already!")
+        return data
 
 
 class CollectionSerializer(serializers.ModelSerializer):
@@ -31,7 +40,14 @@ class CollectionSerializer(serializers.ModelSerializer):
 
     def validate_links(self, links):
         for link in links:
-            print(link.author)
             if self.context["request"].user != link.author:
-                raise serializers.ValidationError("It's not your.... ;)")
+                raise serializers.ValidationError("It's not yours... ;)")
         return links
+
+    def validate(self, data):
+        name = self.initial_data.get("name")
+        if name in Collection.objects.filter(
+            author=self.context["request"].user
+        ).values_list("name", flat=True):
+            raise ValidationError("You have this collection already!")
+        return data
