@@ -72,11 +72,11 @@ You can only add your own links. When you delete a collection, the links are not
         
 Test DB data:
 
-POSTGRES_USER=django_user
-POSTGRES_PASSWORD=mysecretpassword
-POSTGRES_DB=django
-DB_HOST=db
-DB_PORT=5432
+        POSTGRES_USER=django_user
+        POSTGRES_PASSWORD=mysecretpassword
+        POSTGRES_DB=django
+        DB_HOST=db
+        DB_PORT=5432
 
 Test superuser: email admin@admin.com, password admin
 
