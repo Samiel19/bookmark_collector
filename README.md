@@ -1,4 +1,4 @@
-# BookmarkMaker service
+# BookmarkCollector service
 
 
 ## API (server part) for bookmark storage
