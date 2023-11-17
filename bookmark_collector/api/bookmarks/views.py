@@ -1,6 +1,6 @@
 from api.permissions import IsAuthorOrReadOnlyPermission
 from bookmark.models import Bookmark, Collection
-from rest_framework import viewsets
+from rest_framework import permissions, viewsets
 
 from .serializers import BookmarkSerializer, CollectionSerializer
 
@@ -13,7 +13,10 @@ class BookmarkViewSet(viewsets.ModelViewSet):
     """
 
     serializer_class = BookmarkSerializer
-    permission_classes = (IsAuthorOrReadOnlyPermission,)
+    permission_classes = (
+        IsAuthorOrReadOnlyPermission,
+        permissions.IsAuthenticated,
+    )
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -31,7 +34,10 @@ class CollectionViewSet(viewsets.ModelViewSet):
     """
 
     serializer_class = CollectionSerializer
-    permission_classes = (IsAuthorOrReadOnlyPermission,)
+    permission_classes = (
+        IsAuthorOrReadOnlyPermission,
+        permissions.IsAuthenticated,
+    )
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

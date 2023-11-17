@@ -3,6 +3,11 @@ from user.models import BookmarkUser
 
 
 class BookmarkUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for bookmark_collector users.
+
+    """
+
     class Meta:
         model = BookmarkUser
         fields = (
