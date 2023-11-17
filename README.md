@@ -67,6 +67,9 @@ You can only add your own links. When you delete a collection, the links are not
         - use http://127.0.0.1:8000/admin/ or http://127.0.0.1:8000/swagger/ or http://127.0.0.1:8000/api/ or
         http://127.0.0.1:8000/redoc/
 
+
+        Test data from docker volume bookmark_collector_pg_data: https://disk.yandex.ru/d/xxCeiRoMDnANsA
+        
         Test DB data:
 
         POSTGRES_USER=django_user
