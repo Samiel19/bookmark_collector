@@ -30,8 +30,8 @@ router.register("bookmark_users", UserViewSet, basename="bookmark_users")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
-    path("api/", include("djoser.urls")),  # Работа с пользователями
-    path("api/", include("djoser.urls.authtoken")),  # Работа с токенами
+    path("api/", include("djoser.urls")),
+    path("api/", include("djoser.urls.authtoken")),
 ]
 
 

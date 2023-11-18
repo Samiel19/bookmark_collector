@@ -7,8 +7,6 @@ User = get_user_model()
 
 
 class Bookmark(models.Model):
-    """Model describing bookmarks"""
-
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -45,6 +43,7 @@ class Bookmark(models.Model):
         max_length=Limits.URL_LEN.value,
         blank=True,
         editable=False,
+        db_column="image",
     )
     created_at = models.DateTimeField(
         "Publication date",
@@ -58,7 +57,7 @@ class Bookmark(models.Model):
             models.UniqueConstraint(
                 fields=["author", "link"],
                 name="unique_link",
-                violation_error_message=("You have this link already!"),
+                violation_error_message="You have this link already!",
             ),
         ]
         verbose_name = "Bookmark"
@@ -93,8 +92,6 @@ class Bookmark(models.Model):
 
 
 class Collection(models.Model):
-    """Model describing bookmark collections"""
-
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -128,7 +125,7 @@ class Collection(models.Model):
             models.UniqueConstraint(
                 fields=["author", "name"],
                 name="unique_collection",
-                violation_error_message=("You have this collection already!"),
+                violation_error_message="You have this collection already!",
             ),
         ]
         default_related_name = "collection"
