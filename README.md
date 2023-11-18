@@ -52,28 +52,14 @@ You can only add your own links. When you delete a collection, the links are not
 
         For deploy:
 
-        - Use docker-compose.yml
+        - Put docker-compose.yml and bookmark_collector_start.sh is same dir
 
-        - docker compose -f docker-compose.yml up
+        - Run bookmark_collector_start.sh
 
-        - docker compose -f docker-compose.yml exec bookmark_collector python manage.py collectstatic
-
-        - docker compose -f docker-compose.yml exec bookmark_collector cp -r collected_static/ ../bookmark_collector_static/static
-
-        - docker compose -f docker-compose.yml exec bookmark_collector python manage.py migrate
+        - While first start script will collect staticfiles and makemigrations/migration. After this, can add superuser in terminal for using /admin endpoint
 
         - use http://127.0.0.1:8000/admin/ or http://127.0.0.1:8000/swagger/ or http://127.0.0.1:8000/api/ or
         http://127.0.0.1:8000/redoc/
-
-        Test DB data:
-
-        POSTGRES_USER=django_user
-        POSTGRES_PASSWORD=mysecretpassword
-        POSTGRES_DB=django
-        DB_HOST=db
-        DB_PORT=5432
-
-        Test superuser: email admin@admin.com, password admin
 
 
 # Code formatting

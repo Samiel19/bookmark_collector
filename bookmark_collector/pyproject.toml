@@ -22,6 +22,7 @@ uritemplate = "^4.1.1"
 drf-yasg = "^1.21.7"
 inflection = "^0.5.1"
 django-cors-headers = "^4.3.1"
+pytest = "^7.4.3"
 
 
 [tool.poetry.group.dev.dependencies]

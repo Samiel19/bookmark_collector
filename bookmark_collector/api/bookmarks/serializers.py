@@ -1,8 +1,4 @@
-from urllib import error
-from urllib.request import Request, urlopen
-
 from bookmark.models import Bookmark, Collection
-from core.text import TextConst
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from rest_framework.relations import PrimaryKeyRelatedField, SlugRelatedField
@@ -22,15 +18,10 @@ class BookmarkSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         link = self.initial_data.get("link")
-        req = Request(link, headers=TextConst.HEADERS)
-        try:
-            urlopen(req)
-        except error.URLError as e:
-            raise ValidationError(f"No bookmark, because of {e}")
         if link in Bookmark.objects.filter(
             author=self.context["request"].user
         ).values_list("link", flat=True):
-            raise ValidationError("You have this bookmark already!")
+            raise ValidationError({"link": "You have this bookmark already!"})
         return data
 
 
@@ -50,7 +41,7 @@ class CollectionSerializer(serializers.ModelSerializer):
     def validate_links(self, links):
         for link in links:
             if self.context["request"].user != link.author:
-                raise serializers.ValidationError("It's not yours... ;)")
+                raise ValidationError("It's not yours... ;)")
         return links
 
     def validate(self, data):
@@ -58,5 +49,7 @@ class CollectionSerializer(serializers.ModelSerializer):
         if name in Collection.objects.filter(
             author=self.context["request"].user
         ).values_list("name", flat=True):
-            raise ValidationError("You have this collection already!")
+            raise ValidationError(
+                {"name": "You have this collection already!"}
+            )
         return data
