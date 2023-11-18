@@ -54,9 +54,9 @@ You can only add your own links. When you delete a collection, the links are not
 
         For deploy:
 
-        - Put docker-compose.yml and bookmark_collector_start.sh is same dir
+        - Put docker-compose.yml and bookmark_collector_start.sh is same directory
 
-        - Run bookmark_collector_start.sh
+        - Go to this dir and run bash bookmark_collector_start.sh in terminal
 
         - While first start script will collect staticfiles and makemigrations/migration. 
         After this, can add superuser in terminal for using /admin endpoint
