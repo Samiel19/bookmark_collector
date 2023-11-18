@@ -60,8 +60,9 @@ You can only add your own links. When you delete a collection, the links are not
 
         - While first start script will collect staticfiles and makemigrations/migration. After this, can add superuser in terminal for using /admin endpoint
 
-        - use http://127.0.0.1:8000/admin/ or http://127.0.0.1:8000/swagger/ or http://127.0.0.1:8000/api/ or
+        - Use http://127.0.0.1:8000/admin/ or http://127.0.0.1:8000/swagger/ or http://127.0.0.1:8000/api/ or
         http://127.0.0.1:8000/redoc/
+        - If you need, use docker compose down and docker compose down --remove-orphans to remove containers, you don`t need
 
 
 # Code formatting
