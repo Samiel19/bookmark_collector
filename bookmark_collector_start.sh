@@ -26,5 +26,6 @@ docker compose -f docker-compose.yml exec bookmark_collector cp -r collected_sta
 docker compose -f docker-compose.yml exec bookmark_collector python manage.py makemigrations user
 docker compose -f docker-compose.yml exec bookmark_collector python manage.py makemigrations bookmark
 docker compose -f docker-compose.yml exec bookmark_collector python manage.py migrate
+echo "Create superuser account now:"
 docker compose -f docker-compose.yml exec bookmark_collector python manage.py createsuperuser
 fi
