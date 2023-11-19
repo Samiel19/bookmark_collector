@@ -39,6 +39,9 @@ The user can add one link once. The user sees only his own links.
 Links can be added to collections, the names of the collections are unique.
 You can only add your own links. When you delete a collection, the links are not deleted.
 
+Currently, link type data is stored as string data for clarity. In a real implementation, 
+it would make sense to use an int type to store reference types, since this made the base 
+more efficient, and the number of types is very limited anyway.
 
 
 # Infrastructure
