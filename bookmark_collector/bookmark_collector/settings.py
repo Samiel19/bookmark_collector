@@ -11,8 +11,9 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django_secret_key")
 
 DEBUG = os.getenv("DEBUG", True)
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(", ")
+ALLOWED_HOSTS = ["*"]
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "http")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -90,6 +91,21 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://158.160.46.204",
+    "http://localhost:8000",
+    "https://*.127.0.0.1",
+]
+
+
+CORS_ORIGIN_WHITELIST = [
+    "http://158.160.46.204",
+    "http://localhost:8000",
+    "https://*.127.0.0.1",
+]
+
+CSRF_COOKIE_SECURE = False
 
 LANGUAGE_CODE = "en"
 
