@@ -1,13 +1,13 @@
 #!/bin/sh
 
 
-
-
 FILE=./test_ride
 if [ -d "$FILE" ]
 then
 cd ./test_ride
 docker compose down
+docker pull samiel19/bookmark_collector
+docker pull samiel19/bookmark_collector_gateway
 docker compose -f docker-compose.yml up -d
 else
 mkdir test_ride test_ride/bookmark_collector

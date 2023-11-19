@@ -54,11 +54,16 @@ You can only add your own links. When you delete a collection, the links are not
 
         For deploy:
 
-        - Put "docker-compose.yml" and "bookmark_collector_start.sh" is same directory
+        - Install Docker
+
+        - You need two files: "docker-compose.yml" and "bookmark_collector_start.sh"
+
+        - Check that "docker-compose.yml" and "bookmark_collector_start.sh" are in the same
+        directory
 
         - Go to this dir and do "chmod +x ./bookmark_collector_start.sh" in terminal
 
-        - Run "bookmark_collector_start.sh"
+        - Run "./bookmark_collector_start.sh"
 
         - While first start script will collect staticfiles and makemigrations/migration.
         After this, can add superuser in terminal for using /admin endpoint
@@ -66,8 +71,13 @@ You can only add your own links. When you delete a collection, the links are not
         - Use http://127.0.0.1:8000/admin/ or http://127.0.0.1:8000/swagger/ or
         http://127.0.0.1:8000/api/ or http://127.0.0.1:8000/redoc/
 
-        - If you need, use "docker compose down" and
+        - If you need to stop containers, use "cd /test_ride", "docker compose down" or
         "docker compose down --remove-orphans" to remove containers, you don`t need
+
+        - Also, you can use this service on ip http://158.160.46.204 as http://158.160.46.204/admin/
+        or http://158.160.46.204/swagger/ or http://158.160.46.204/api/ or http://158.160.46.204/redoc/
+
+        - Test superuser on server: email: admin@admin.com, password: admin
 
 
 # Code formatting
